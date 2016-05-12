@@ -12,12 +12,15 @@
  * details.
  */
 
-package com.liferay.portal.cluster.single.internal.activator;
+package com.liferay.portal.cluster.single.internal.profile;
 
 import com.liferay.portal.cluster.single.internal.SingleClusterExecutor;
 import com.liferay.portal.cluster.single.internal.SingleClusterLink;
 import com.liferay.portal.cluster.single.internal.SingleClusterMasterExecutor;
-import com.liferay.portal.kernel.util.ReleaseInfo;
+import com.liferay.portal.profile.gatekeeper.BaseDSModuleProfile;
+import com.liferay.portal.profile.gatekeeper.Profile;
+
+import java.util.Collections;
 
 import org.osgi.service.component.ComponentContext;
 import org.osgi.service.component.annotations.Activate;
@@ -26,20 +29,16 @@ import org.osgi.service.component.annotations.Component;
 /**
  * @author Shuyang Zhou
  */
-@Component(immediate = true)
-public class GatekeeperActivator {
+@Component(immediate = true, service = Profile.class)
+public class DSModuleProfile extends BaseDSModuleProfile {
 
 	@Activate
 	public void activate(ComponentContext componentContext) {
-		String name = ReleaseInfo.getName();
-
-		if (!name.contains("Community")) {
-			return;
-		}
-
-		componentContext.enableComponent(SingleClusterExecutor.class.getName());
-		componentContext.enableComponent(SingleClusterLink.class.getName());
-		componentContext.enableComponent(
+		init(
+			componentContext,
+			Collections.singleton(Profile.CE_PORTAL_PROFILE_NAME),
+			SingleClusterExecutor.class.getName(),
+			SingleClusterLink.class.getName(),
 			SingleClusterMasterExecutor.class.getName());
 	}
 
