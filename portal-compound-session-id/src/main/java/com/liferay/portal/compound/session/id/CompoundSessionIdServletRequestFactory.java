@@ -15,31 +15,12 @@
 package com.liferay.portal.compound.session.id;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletRequestWrapper;
 
 /**
  * @author Shuyang Zhou
  */
-public class CompoundSessionIdServletRequestFactoryImpl
-	implements CompoundSessionIdServletRequestFactory {
+public interface CompoundSessionIdServletRequestFactory {
 
-	@Override
-	public HttpServletRequest create(HttpServletRequest request) {
-		HttpServletRequest wrappedRequest = request;
-
-		while (wrappedRequest instanceof HttpServletRequestWrapper) {
-			if (wrappedRequest instanceof CompoundSessionIdServletRequest) {
-				return request;
-			}
-
-			HttpServletRequestWrapper httpServletRequestWrapper =
-				(HttpServletRequestWrapper)wrappedRequest;
-
-			wrappedRequest =
-				(HttpServletRequest)httpServletRequestWrapper.getRequest();
-		}
-
-		return new CompoundSessionIdServletRequest(request);
-	}
+	public HttpServletRequest create(HttpServletRequest request);
 
 }
