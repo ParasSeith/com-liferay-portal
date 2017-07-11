@@ -212,26 +212,38 @@ public class ModuleApplicationContextExtender extends AbstractExtender {
 			}
 
 			if (!unavailableComponentDeclarations.isEmpty()) {
-				sb.append("Found unavailable component in bundle : ");
+				sb.append("Found unavailable component in bundle ");
 				sb.append(bundle);
-				sb.append("\n");
+				sb.append(".\n");
 
 				for (Entry<
 						ComponentDeclaration,
 						List<ComponentDependencyDeclaration>> entry :
 							unavailableComponentDeclarations.entrySet()) {
 
-					sb.append("\tComponent:");
+					sb.append("\tComponent ");
 					sb.append(entry.getKey());
-					sb.append(" is not available, due to :\n");
+					sb.append(" is unavailable due to missing required ");
+					sb.append("dependencies: ");
 
-					for (ComponentDependencyDeclaration
-							componentDependencyDeclaration : entry.getValue()) {
+					List<ComponentDependencyDeclaration>
+						componentDependencyDeclarations = entry.getValue();
 
-						sb.append("\t\tRequired dependency :");
+					for (int i = 0; i < componentDependencyDeclarations.size();
+						i++) {
+
+						if (i != 0) {
+							sb.append(", ");
+						}
+
+						ComponentDependencyDeclaration
+							componentDependencyDeclaration =
+								componentDependencyDeclarations.get(i);
+
 						sb.append(componentDependencyDeclaration);
-						sb.append(" is unavailable!\n");
 					}
+
+					sb.append(".");
 				}
 			}
 		}
@@ -239,8 +251,8 @@ public class ModuleApplicationContextExtender extends AbstractExtender {
 		if (sb.index() == 0) {
 			if (_log.isInfoEnabled()) {
 				_log.info(
-					"All Spring Extender Dependency Manager components are " +
-						"registered!");
+					"All Spring extender dependency manager components are " +
+						"registered");
 			}
 		}
 		else {
@@ -269,7 +281,7 @@ public class ModuleApplicationContextExtender extends AbstractExtender {
 			}
 			catch (InterruptedException ie) {
 				if (_log.isInfoEnabled()) {
-					_log.info("Stopped unavailable component scanning.");
+					_log.info("Stopped scanning for unavailable components");
 				}
 			}
 		}
@@ -278,7 +290,7 @@ public class ModuleApplicationContextExtender extends AbstractExtender {
 			_scanningInterval = scanningInterval;
 
 			setDaemon(true);
-			setName("Spring Extender unavailable component scanner");
+			setName("Spring Extender Unavailable Component Scanner");
 		}
 
 		private final long _scanningInterval;
