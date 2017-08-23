@@ -94,20 +94,18 @@ public class VerifyProcessTrackerOSGiCommands {
 			 (release.getState() == ReleaseConstants.STATE_GOOD))) {
 
 			System.out.println(
-				verifyProcessName + " verify process hasn't been executed yet");
+				verifyProcessName + " verify process has not executed");
 		}
 		else {
 			if (release.isVerified()) {
 				System.out.println(
-					verifyProcessName +
-						" verify process was executed without errors");
+					verifyProcessName + " verify process succeeded");
 			}
 			else if (release.getState() ==
 						ReleaseConstants.STATE_VERIFY_FAILURE) {
 
 				System.out.println(
-					verifyProcessName +
-						" verify process failed last time it was executed");
+					verifyProcessName + " verify process failed");
 			}
 		}
 	}
