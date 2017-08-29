@@ -79,7 +79,7 @@ import org.osgi.util.tracker.ServiceTrackerCustomizer;
 )
 public class ReleaseManagerOSGiCommands {
 
-	@Descriptor("List upgrades pending to execute or that are still running")
+	@Descriptor("List pending or running upgrades")
 	public void check() {
 		Set<String> bundleSymbolicNames = _serviceTrackerMap.keySet();
 
