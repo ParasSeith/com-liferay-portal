@@ -312,8 +312,9 @@ public class ModuleApplicationContextExtender extends AbstractExtender {
 							}
 							catch (Exception e) {
 								throw new UpgradeException(
-									"Unable to run tablesSQL: \"" + tablesSQL +
-										"\" for bundle: " + _bundle,
+									"Bundle " + _bundle +
+										" has invalid content in tables.sql:\n" +
+											tablesSQL,
 									e);
 							}
 						}
@@ -325,9 +326,9 @@ public class ModuleApplicationContextExtender extends AbstractExtender {
 							}
 							catch (Exception e) {
 								throw new UpgradeException(
-									"Unable to run sequencesSQL: \"" +
-										sequencesSQL + "\" for bundle: " +
-											_bundle,
+									"Bundle " + _bundle +
+										" has invalid content in " +
+											"sequences.sql:\n" + sequencesSQL,
 									e);
 							}
 						}
@@ -338,9 +339,9 @@ public class ModuleApplicationContextExtender extends AbstractExtender {
 							}
 							catch (Exception e) {
 								throw new UpgradeException(
-									"Unable to run indexesSQL: \"" +
-										indexesSQL + "\" for bundle: " +
-											_bundle,
+									"Bundle " + _bundle +
+										" has invalid content in " +
+											"indexes.sql:\n" + indexesSQL,
 									e);
 							}
 						}
