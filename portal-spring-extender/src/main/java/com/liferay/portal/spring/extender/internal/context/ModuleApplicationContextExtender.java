@@ -313,8 +313,8 @@ public class ModuleApplicationContextExtender extends AbstractExtender {
 							catch (Exception e) {
 								throw new UpgradeException(
 									"Bundle " + _bundle +
-										" has invalid content in tables.sql:\n" +
-											tablesSQL,
+										" has invalid content in " +
+											"tables.sql:\n" + tablesSQL,
 									e);
 							}
 						}
