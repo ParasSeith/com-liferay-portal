@@ -287,26 +287,25 @@ public class ClusterLinkImplTest extends BaseClusterTestCase {
 
 		ClusterLinkImpl clusterLinkImpl = new ClusterLinkImpl();
 
-		Properties channelPropertiesProperties = new Properties();
 		Properties channelNameProperties = new Properties();
+		Properties channelPropertiesProperties = new Properties();
 
 		for (int i = 0; i < channels; i++) {
+			channelNameProperties.put(
+				StringPool.PERIOD + i, "test-channel-name-transport-" + i);
 			channelPropertiesProperties.put(
 				StringPool.PERIOD + i,
 				"test-channel-properties-transport-" + i);
-			channelNameProperties.put(
-				StringPool.PERIOD + i, "test-channel-name-transport-" + i);
 		}
 
 		Map<String, Properties> properties = new HashMap<>();
 
 		properties.put(
-			PropsKeys.CLUSTER_LINK_CHANNEL_PROPERTIES_TRANSPORT,
-			channelPropertiesProperties);
-
-		properties.put(
 			PropsKeys.CLUSTER_LINK_CHANNEL_NAME_TRANSPORT,
 			channelNameProperties);
+		properties.put(
+			PropsKeys.CLUSTER_LINK_CHANNEL_PROPERTIES_TRANSPORT,
+			channelPropertiesProperties);
 
 		clusterLinkImpl.setProps(
 			new Props() {
@@ -356,7 +355,6 @@ public class ClusterLinkImplTest extends BaseClusterTestCase {
 
 		clusterLinkImpl.setClusterChannelFactory(
 			new TestClusterChannelFactory());
-
 		clusterLinkImpl.setPortalExecutorManager(
 			new MockPortalExecutorManager());
 
