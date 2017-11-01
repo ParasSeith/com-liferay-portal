@@ -84,17 +84,20 @@ public class ServiceReferenceAnnotationBeanPostProcessor
 				continue;
 			}
 
-			Class<?> typeClass = serviceReference.type();
-			String filterString = serviceReference.filterString();
-
 			org.osgi.framework.ServiceReference<?> osgiServiceReference = null;
 
 			try {
+				String filterString = serviceReference.filterString();
+
 				if (filterString.isEmpty()) {
+					Class<?> typeClass = serviceReference.type();
+
 					osgiServiceReference = _bundleContext.getServiceReference(
 						typeClass.getName());
 				}
 				else {
+					Class<?> typeClass = serviceReference.type();
+
 					org.osgi.framework.ServiceReference<?>[] serviceReferences =
 						_bundleContext.getServiceReferences(
 							typeClass.getName(), filterString);
