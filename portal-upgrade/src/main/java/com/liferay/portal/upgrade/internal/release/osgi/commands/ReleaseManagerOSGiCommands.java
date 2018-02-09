@@ -301,7 +301,7 @@ public class ReleaseManagerOSGiCommands {
 			catch (Throwable t) {
 				System.out.println(
 					StringBundler.concat(
-						"\nFailed upgrade process of module ",
+						"\nFailed upgrade process for module ",
 						upgradableBundleSymbolicName, ":"));
 
 				t.printStackTrace(System.out);
