@@ -24,7 +24,7 @@ import org.osgi.framework.BundleContext;
 
 /**
  * @author     Peter Fellwock
- * @deprecated As of 1.0.0, with no direct replacement
+ * @deprecated As of Judson, with no direct replacement
  */
 @Deprecated
 public class CustomSQLPool {
