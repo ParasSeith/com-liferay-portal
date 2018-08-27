@@ -194,12 +194,8 @@ public class ClusterMasterExecutorImpl implements ClusterMasterExecutor {
 				masterClusterNodeId = _localClusterNodeId;
 			}
 			else {
-				ClusterNode clusterNode = _clusterExecutorImpl.getClusterNode(
+				masterClusterNodeId = _clusterExecutorImpl.getClusterNodeId(
 					coordinatorAddress);
-
-				if (clusterNode != null) {
-					masterClusterNodeId = clusterNode.getClusterNodeId();
-				}
 			}
 
 			if (Validator.isNotNull(masterClusterNodeId)) {
