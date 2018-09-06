@@ -81,17 +81,19 @@ public class ClusterClassLoaderPool {
 			}
 		}
 
-		if (classLoader == null) {
-			Thread currentThread = Thread.currentThread();
-
-			classLoader = currentThread.getContextClassLoader();
-
+		if ((classLoader == null) && _log.isDebugEnabled()) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
 					StringBundler.concat(
 						"Unable to find ClassLoader for ", contextName,
 						", fall back to current thread's context classLoader"));
 			}
+		}
+
+		if (classLoader == null) {
+			Thread currentThread = Thread.currentThread();
+
+			classLoader = currentThread.getContextClassLoader();
 		}
 
 		return classLoader;
