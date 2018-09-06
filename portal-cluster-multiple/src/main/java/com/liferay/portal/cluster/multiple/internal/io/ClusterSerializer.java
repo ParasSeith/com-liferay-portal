@@ -22,32 +22,26 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
 
-import java.nio.ByteBuffer;
-
 /**
  * @author Lance Ji
  */
 public class ClusterSerializer {
 
-	public ClusterSerializer() {
-		_unsyncByteArrayOutputStream = new UnsyncByteArrayOutputStream();
-	}
-
-	public ByteBuffer toByteBuffer() {
-		return _unsyncByteArrayOutputStream.unsafeGetByteBuffer();
-	}
-
-	public void writeObject(Serializable serializable) {
+	public static byte[] writeObject(Serializable serializable) {
 		try {
-			_unsyncByteArrayOutputStream.write(
-				SerializationConstants.TC_OBJECT);
+			UnsyncByteArrayOutputStream unsyncByteArrayOutputStream =
+				new UnsyncByteArrayOutputStream();
+
+			unsyncByteArrayOutputStream.write(SerializationConstants.TC_OBJECT);
 
 			ObjectOutputStream objectOutputStream =
 				new ClusterAnnotatedObjectOutputStream(
-					_unsyncByteArrayOutputStream);
+					unsyncByteArrayOutputStream);
 
 			objectOutputStream.writeObject(serializable);
 			objectOutputStream.flush();
+
+			return unsyncByteArrayOutputStream.unsafeGetByteArray();
 		}
 		catch (IOException ioe) {
 			throw new RuntimeException(
@@ -56,9 +50,7 @@ public class ClusterSerializer {
 		}
 	}
 
-	private final UnsyncByteArrayOutputStream _unsyncByteArrayOutputStream;
-
-	private class ClusterAnnotatedObjectOutputStream
+	private static class ClusterAnnotatedObjectOutputStream
 		extends ObjectOutputStream {
 
 		public ClusterAnnotatedObjectOutputStream(OutputStream outputStream)
