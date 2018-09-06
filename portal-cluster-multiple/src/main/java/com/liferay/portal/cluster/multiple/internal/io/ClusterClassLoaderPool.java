@@ -71,8 +71,8 @@ public class ClusterClassLoaderPool {
 
 								_log.warn(
 									StringBundler.concat(
-										"Unable to find ClassLoader for ",
-										contextName, ", ClassLoader ",
+										"Unable to find class loader for ",
+										contextName, ", class loader ",
 										symbolicName, StringPool.UNDERLINE,
 										String.valueOf(version),
 										" is provided instead"));
@@ -85,8 +85,9 @@ public class ClusterClassLoaderPool {
 			if ((classLoader == null) && _log.isDebugEnabled()) {
 				_log.debug(
 					StringBundler.concat(
-						"Unable to find ClassLoader for ", contextName,
-						", fall back to current thread's context classLoader"));
+						"Unable to find class loader for ", contextName,
+						", fall back to current thread's context class ",
+						"loader"));
 			}
 		}
 
@@ -104,9 +105,9 @@ public class ClusterClassLoaderPool {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
 					StringBundler.concat(
-						"Unable to find contextName for ",
+						"Unable to find context name for ",
 						classLoader.toString(),
-						", send 'null' as contextName instead"));
+						", send 'null' as context name instead"));
 			}
 		}
 
