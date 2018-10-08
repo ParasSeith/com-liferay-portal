@@ -197,11 +197,11 @@ public class JGroupsClusterChannel implements ClusterChannel {
 	private String _getJChannelProperties(String[] excludedPropertyKeys)
 		throws ReflectiveOperationException {
 
+		StringBundler sb = new StringBundler();
+
 		ProtocolStack protocolStack = _jChannel.getProtocolStack();
 
 		List<Protocol> protocols = protocolStack.getProtocols();
-
-		StringBundler sb = new StringBundler();
 
 		for (int i = protocols.size() - 1; i >= 0; i--) {
 			Protocol protocol = protocols.get(i);
