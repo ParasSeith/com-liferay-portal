@@ -92,9 +92,9 @@ public class JGroupsClusterChannel implements ClusterChannel {
 			if (_log.isInfoEnabled()) {
 				StringBundler sb = new StringBundler(7);
 
-				sb.append("Create a new JGroups channel {channel name: ");
+				sb.append("Create a new JGroups channel {channelName: ");
 				sb.append(_clusterName);
-				sb.append(", local address: ");
+				sb.append(", localAddress: ");
 				sb.append(_localAddress.getDescription());
 				sb.append(", properties: ");
 				sb.append(
