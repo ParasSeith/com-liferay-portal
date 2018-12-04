@@ -315,7 +315,6 @@ public class ClusterLinkImplTest extends BaseClusterTestCase {
 
 		Map<String, Object> properties = new HashMap<>();
 
-		properties.put(PropsKeys.CLUSTER_LINK_ENABLED, String.valueOf(enabled));
 		properties.put(
 			PropsKeys.CLUSTER_LINK_CHANNEL_LOGIC_NAME_TRANSPORT,
 			new Properties());
@@ -325,6 +324,7 @@ public class ClusterLinkImplTest extends BaseClusterTestCase {
 		properties.put(
 			PropsKeys.CLUSTER_LINK_CHANNEL_PROPERTIES_TRANSPORT,
 			channelPropertiesProperties);
+		properties.put(PropsKeys.CLUSTER_LINK_ENABLED, String.valueOf(enabled));
 
 		clusterLinkImpl.setProps(PropsTestUtil.setProps(properties));
 
